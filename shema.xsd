@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    
+    
+    <!-- J'ai pas ajouter dans les attributs use="required" ! -->
+    <!-- Definie les types Complexe -->
+    <!-- Facture -->
+    <xs:complexType name="factureType">
+        <xs:attribute name="numFact" type="xs:string"/>
+        <xs:attribute name="dateFact" type="xs:date"/>
+        <xs:attribute name="montant" type="xs:decimal"/>
+        <xs:attribute name="reglee" type="xs:string"/>
+    </xs:complexType>
+    
+    <!--Abonnement -> Type -->
+    <xs:complexType name="abonnementType">
+        <xs:sequence>
+            <xs:element name="facture" type="factureType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="num" type="xs:string"/>
+        <xs:attribute name="type" type="xs:string"/>
+        <xs:attribute name="dateAb" type="xs:date"/>
+    </xs:complexType>
+    
+    <!-- Client -> Abonnement -> Type-->
+    <xs:complexType name="clientType">
+        <xs:sequence>
+            <xs:element name="abonnement" type="abonnementType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="code" type="xs:string"/>
+        <xs:attribute name="nom" type="xs:string"/>
+    </xs:complexType>
+    
+    <!-- Defenir l'element racine -->
+    <!-- Operateur -> Client -> Abonnement -> Type-->
+    <xs:element name="operateur">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="client" type="clientType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

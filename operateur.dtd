@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Declaration des balises -->
+<!--chaque operateur contient liste de clients -->
+<!ELEMENT operateur (client)+> 
+
+<!--chaque client contient liste de abonnement -->
+<!ELEMENT client (abonnement)+>
+
+<!--chaque abonnement contient liste de facteur -->
+<!ELEMENT abonnement (facture)+ >
+
+<!-- Facteur balise vide ne contient aucun fils  -->
+<!ELEMENT facture EMPTY>
+
+<!-- Declaration des attributs -->
+<!-- CDATA pour date (contient '-') NMTOKEN pour chaine sans espace -->
+<!-- id should be ID but format of ID is 'ID1' not just '1' -->
+
+<!ATTLIST client      code NMTOKEN #REQUIRED
+                      nom NMTOKEN #REQUIRED >
+                 
+<!ATTLIST abonnement num NMTOKEN #REQUIRED
+                     type NMTOKEN #REQUIRED
+                     dateAb CDATA #REQUIRED >
+                     
+<!ATTLIST facture     numFact NMTOKEN #REQUIRED
+                      dateFact CDATA #REQUIRED
+                      montant CDATA #REQUIRED
+                      reglee (Oui|Non) 'Non'>
